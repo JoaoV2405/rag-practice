@@ -34,6 +34,7 @@ httpx2==2.13.1
 huggingface_hub==2.2.0
 idna==3.20
 importlib_resources==7.1.0
+ipykernel
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 kubernetes==37.0.0
