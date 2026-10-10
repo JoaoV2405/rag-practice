@@ -34,9 +34,14 @@ def iter_pdfs(root: Path) -> list[Path]:
 
 
 def extract_pages(pdf_path: Path) -> list[str]:
-    """Extract one plain-text string per PDF page."""
+    """Extract one plain-text string per PDF page.
+
+    Ligatures (e.g. "ﬁ") are expanded to plain letters so that tokens such as
+    "significa" match between documents and queries.
+    """
+    flags = pymupdf.TEXT_PRESERVE_WHITESPACE | pymupdf.TEXT_MEDIABOX_CLIP
     with pymupdf.open(pdf_path) as document:
-        return [page.get_text("text") for page in document]
+        return [page.get_text("text", flags=flags) for page in document]
 
 
 def _split_paragraphs(text: str) -> list[str]:
